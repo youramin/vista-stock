@@ -7,7 +7,7 @@
             @include('dashboard.layouts.title')
             @canany(['isAdmin', 'isMedia', 'isMarketing'])
                 <div class="border-b">
-                    <a href="/dashboard/supplier/category_supplier/create" class="index-link btn-primary">
+                    <a href="/dashboard/categorysuppliers/create" class="index-link btn-primary">
                         <svg class="fill-current w-5" clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round"
                             stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -20,7 +20,7 @@
             @endcanany
         </div>
         <div class="">
-            <form action="/dashboard/supplier/category_supplier">
+            <form action="/dashboard/categorysuppliers">
                 <div class="md:flex mt-2">
                     <div class="flex">
                         <input id="search" name="search"
@@ -61,9 +61,9 @@
                     @foreach ($categorysuppliers as $categorysupplier )
                     <tr>
                         <td class="text-teal-700 border text-sm text-center">{{ $loop->iteration }}</td>
-                        <td class="text-teal-700 border text-sm text-center">{{ $category_supplier->code }}</td>
-                        <td class="text-teal-700 border text-sm text-center">{{ $category->name }}</td>
-                        <td class="text-teal-700 border text-sm text-center">{{ $category->description }}</td>
+                        <td class="text-teal-700 border text-sm text-center">{{ $categorysupplier->code }}</td>
+                        <td class="text-teal-700 border text-sm text-center">{{ $categorysupplier->name }}</td>
+                        <td class="text-teal-700 border text-sm text-center">{{ $categorysupplier->description }}</td>
                         <td class="text-teal-700 border text-sm text-center">
                             <div class="flex justify-center items-center">
                                 <a href="/dashboard/categories/{{ $categorysupplier->id }}"
@@ -93,7 +93,7 @@
                                         @csrf
                                         <button
                                             class="index-link text-white w-8 h-5 rounded bg-red-600 hover:bg-red-700 drop-shadow-md"
-                                            onclick="return confirm('Apakah anda yakin ingin menghapus {{ $categorysupplier->name }} dengan kode {{ $category->code }} ?')">
+                                            onclick="return confirm('Apakah anda yakin ingin menghapus {{ $categorysupplier->name }} dengan kode {{ $categorysupplier->code }} ?')">
                                             <svg class="fill-current w-[18px] 2xl:w-5" clip-rule="evenodd"
                                                 fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2"
                                                 viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

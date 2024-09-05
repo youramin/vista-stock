@@ -30,7 +30,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('aut
 Route::resource('/dashboard/users/users', UserController::class)->middleware(['auth','user_access']);
 Route::resource('/dashboard/categories', CategoryController::class)->middleware(['auth','user_access']);
 Route::resource('/dashboard/products', ProductController::class)->middleware(['auth','user_access']);
-Route::resource('/dashboard/supplier/category_supplier', CategorySupplierController::class)->middleware(['auth','user_access']);
+Route::resource('/dashboard/categorysuppliers', CategorySupplierController::class)->middleware(['auth','user_access']);
 
 Route::get('/', function () {
     return view('index',[

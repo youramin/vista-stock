@@ -43,7 +43,7 @@ class CategorySupplierController extends Controller
 
         Category_Supplier::create($request->all());
 
-        return redirect()->route('dashboard.categorysuppliers.index')
+        return redirect()->route('categorysuppliers.index')
                          ->with('success', 'Kategori supplier berhasil ditambahkan.');
     }
 
