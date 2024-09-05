@@ -81,7 +81,7 @@
 
                         <!-- Sidebar Supplier start-->
                         <div class="div-nav-a">
-                            <a class="nav-a {{ Request::is('dashboard/marketing*') ? 'active' : '' }}" href="">
+                            <a class="nav-a {{ Request::is('dashboard/supplier/category_suppliers*') ? 'active' : '' }}" href="">
                                 <svg role="img" class="nav-svg transition duration-300 ease-in-out"
                                     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <title>Supplier</title>
@@ -92,7 +92,7 @@
                             <li class="group hidden" id="liMarketing" name="liMarketing"
                                 onclick="showHideDropdown(this)">
                                 <a href="#"
-                                    class="nav-a mx-2 {{ Request::is('dashboard/marketing*') ? 'active' : '' }}">
+                                    class="nav-a mx-2 {{ Request::is('dashboard/supplier/category_suppliers*') ? 'active' : '' }}">
                                     <span class="flex w-40"> Supplier </span>
                                     <svg id="marketingArrow" name="marketingArrow"
                                         class="svg-arrow rotate-180 transition duration-300 ease-in-out" role="img"
@@ -106,8 +106,8 @@
                                 <ul class="hidden" id="marketingChild" name="marketingChild">
                                     <!-- Category Start -->
                                     <li class="group">
-                                        <a class="nav-a ml-2 border-t-[1px] {{ Request::is('/dashboard/marketing/clients*') ? 'active' : '' }}"
-                                            href="/dashboard/marketing/clients">
+                                        <a class="nav-a ml-2 border-t-[1px] {{ Request::is('dashboard/supplier/category_suppliers*') ? 'active' : '' }}"
+                                            href="dashboard/supplier/category_suppliers">
                                             <svg class="child-nav-svg" role="img" xmlns="http://www.w3.org/2000/svg"
                                                 viewBox="0 0 24 24">
                                                 <path

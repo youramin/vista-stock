@@ -1,13 +1,15 @@
 <?php
 
+use App\Models\Supplier;
+use App\Models\Category_Supplier;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\ProductController;
-use App\Models\Supplier;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\CategorySupplierController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +30,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('aut
 Route::resource('/dashboard/users/users', UserController::class)->middleware(['auth','user_access']);
 Route::resource('/dashboard/categories', CategoryController::class)->middleware(['auth','user_access']);
 Route::resource('/dashboard/products', ProductController::class)->middleware(['auth','user_access']);
-Route::resource('/dashboard/supplier', SupplierController::class)->middleware(['auth','user_access']);
+Route::resource('/dashboard/supplier/category_supplier', CategorySupplierController::class)->middleware(['auth','user_access']);
 
 Route::get('/', function () {
     return view('index',[

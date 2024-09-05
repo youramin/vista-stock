@@ -41,10 +41,10 @@ class CategorySupplierController extends Controller
             'description' => 'nullable|string',
         ]);
 
-        Category::create($request->all());
+        Category_Supplier::create($request->all());
 
         return redirect()->route('dashboard.categorysuppliers.index')
-                         ->with('success', 'Kategori berhasil ditambahkan.');
+                         ->with('success', 'Kategori supplier berhasil ditambahkan.');
     }
 
     /**
@@ -52,7 +52,10 @@ class CategorySupplierController extends Controller
      */
     public function show(Category_Supplier $category_Supplier): Response
     {
-        
+        return response()->view('dashboard.categorysuppliers.show', [
+            'category_supplier' => $category_Supplier,
+            'title' => 'Detail Kategori supplier'
+        ]);
     }
 
     /**
@@ -60,7 +63,10 @@ class CategorySupplierController extends Controller
      */
     public function edit(Category_Supplier $category_Supplier): Response
     {
-        //
+        return response()->view('dashboard.categorysuppliers.edit', [
+            'category_supplier' => $category_Supplier,
+            'title' => 'Edit Kategori supplier'
+        ]);
     }
 
     /**
@@ -68,7 +74,16 @@ class CategorySupplierController extends Controller
      */
     public function update(Request $request, Category_Supplier $category_Supplier): RedirectResponse
     {
-        //
+        $request->validate([
+            'code' => 'required|string|max:225',
+            'name' => 'required|string|max:225',
+            'description' => 'nullable|string',
+        ]);
+
+        $category_Supplier->update($request->all());
+
+        return redirect()->route('categorysupplier.index')
+                         ->with('success', 'Kategori supplier berhasil diperbarui.');
     }
 
     /**
@@ -76,6 +91,9 @@ class CategorySupplierController extends Controller
      */
     public function destroy(Category_Supplier $category_Supplier): RedirectResponse
     {
-        //
+        $category_Supplier->delete();
+
+        return redirect()->route('categorysuppliers.index')
+                         ->with('success', 'Kategori supplier berhasil dihapus.');
     }
 }

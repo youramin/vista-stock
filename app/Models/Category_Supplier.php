@@ -9,8 +9,8 @@ class Category_Supplier extends Model
 {
     protected $guarded = ['id'];
 
-    public function category_supplier(){
-        return $this->hasMany(Product::class, 'category_supplier_id', 'id');
+    public function suppliers(){
+        return $this->hasMany(Supplier::class, 'category_supplier_id', 'id');
     }
 
 }
