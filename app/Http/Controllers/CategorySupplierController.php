@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category_Supplier;
+use App\Models\CategorySupplier;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -15,7 +15,7 @@ class CategorySupplierController extends Controller
     public function index(): Response
     {
         return response()-> view ('dashboard.categorysuppliers.index', [
-            'categorysuppliers'=>Category_Supplier::all(),
+            'categorysuppliers'=>CategorySupplier::all(),
             'title' => 'Daftar Katagori Supplier'
         ]);
     }
@@ -41,7 +41,7 @@ class CategorySupplierController extends Controller
             'description' => 'nullable|string',
         ]);
 
-        Category_Supplier::create($request->all());
+        CategorySupplier::create($request->all());
 
         return redirect()->route('categorysuppliers.index')
                          ->with('success', 'Kategori supplier berhasil ditambahkan.');
@@ -50,10 +50,10 @@ class CategorySupplierController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Category_Supplier $category_Supplier): Response
+    public function show(CategorySupplier $categorysupplier): Response
     {
         return response()->view('dashboard.categorysuppliers.show', [
-            'category_supplier' => $category_Supplier,
+            'categorysupplier' => $categorysupplier,
             'title' => 'Detail Kategori supplier'
         ]);
     }
@@ -61,10 +61,10 @@ class CategorySupplierController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Category_Supplier $category_Supplier): Response
+    public function edit(CategorySupplier $categorysupplier): Response
     {
         return response()->view('dashboard.categorysuppliers.edit', [
-            'category_supplier' => $category_Supplier,
+            'categorysupplier' => $categorysupplier,
             'title' => 'Edit Kategori supplier'
         ]);
     }
@@ -72,7 +72,7 @@ class CategorySupplierController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Category_Supplier $category_Supplier): RedirectResponse
+    public function update(Request $request, CategorySupplier $categorysupplier): RedirectResponse
     {
         $request->validate([
             'code' => 'required|string|max:225',
@@ -80,18 +80,18 @@ class CategorySupplierController extends Controller
             'description' => 'nullable|string',
         ]);
 
-        $category_Supplier->update($request->all());
+        $categorysupplier->update($request->all());
 
-        return redirect()->route('categorysupplier.index')
+        return redirect()->route('categorysuppliers.index')
                          ->with('success', 'Kategori supplier berhasil diperbarui.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category_Supplier $category_Supplier): RedirectResponse
+    public function destroy(CategorySupplier $categorysupplier): RedirectResponse
     {
-        $category_Supplier->delete();
+        $categorysupplier->delete();
 
         return redirect()->route('categorysuppliers.index')
                          ->with('success', 'Kategori supplier berhasil dihapus.');

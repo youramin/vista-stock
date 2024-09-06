@@ -14,7 +14,10 @@ class SupplierController extends Controller
      */
     public function index(): Response
     {
-        //
+        return response()-> view ('dashboard.suppliers.index', [
+            'suppliers'=>Supplier::with('categorysupplier')->get(),
+            'title' => 'Daftar supplier'
+        ]);
     }
 
     /**

@@ -1,13 +1,10 @@
 <?php
 
-use App\Models\Supplier;
-use App\Models\Category_Supplier;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CategorySupplierController;
 
