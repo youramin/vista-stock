@@ -20,7 +20,7 @@
             @endcanany
         </div>
         <div class="">
-            <form action="/dashboard/categorysuppliers">
+            <form action="/dashboard/categorysuppliers/">
                 <div class="md:flex mt-2">
                     <div class="flex">
                         <input id="search" name="search"
@@ -66,7 +66,7 @@
                         <td class="text-teal-700 border text-sm text-center">{{ $categorysupplier->description }}</td>
                         <td class="text-teal-700 border text-sm text-center">
                             <div class="flex justify-center items-center">
-                                <a href="/categorysuppliers/{{ $categorysupplier->id }}"
+                                <a href="/dashboard/categorysuppliers/{{ $categorysupplier->id }}"
                                     class="index-link text-white w-7 2xl:w-8 h-5 rounded bg-teal-500 hover:bg-teal-600 drop-shadow-md mx-1">
                                     <svg class="fill-current w-[18px] 2xl:w-5" clip-rule="evenodd"
                                         fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2"
@@ -77,7 +77,7 @@
                                     </svg>
                                 </a>
                                 @canany(['isAdmin', 'isMedia', 'isMarketing'])
-                                    <a href="/dashboard/categorysuppliers{{ $categorysupplier->id }}/edit"
+                                    <a href="/dashboard/categorysuppliers/{{ $categorysupplier->id }}/edit"
                                         class="index-link text-white w-7 2xl:w-8 h-5 rounded bg-amber-400 hover:bg-amber-500 drop-shadow-md mx-1">
                                         <svg class="fill-current w-[18px] 2xl:w-5" clip-rule="evenodd"
                                             fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2"
@@ -87,7 +87,7 @@
                                                 fill-rule="nonzero" />
                                         </svg>
                                     </a>
-                                    <form action="/dashboard/categorysuppliers{{ $categorysupplier->id }}"
+                                    <form action="/dashboard/categorysuppliers/{{ $categorysupplier->id }}"
                                         method="post" class="flex m-1">
                                         @method('delete')
                                         @csrf

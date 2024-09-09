@@ -5,8 +5,10 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CategorySupplierController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +30,9 @@ Route::resource('/dashboard/users/users', UserController::class)->middleware(['a
 Route::resource('/dashboard/categories', CategoryController::class)->middleware(['auth','user_access']);
 Route::resource('/dashboard/products', ProductController::class)->middleware(['auth','user_access']);
 Route::resource('/dashboard/categorysuppliers', CategorySupplierController::class)->middleware(['auth','user_access']);
+Route::resource('/dashboard/suppliers', SupplierController::class)->middleware(['auth','user_access']);
+
+
 
 Route::get('/', function () {
     return view('index',[
