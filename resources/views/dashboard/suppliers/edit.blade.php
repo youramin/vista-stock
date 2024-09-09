@@ -39,7 +39,7 @@
                     <label for="category_supplier_id" class="block text-teal-700 font-semibold mb-2">Kategori Barang</label>
                     <select name="category_supplier_id" id="category_supplier_id" class="w-full p-2 border border-teal-300 rounded-lg @error('category_supplier_id') border-red-500 @enderror">
                         <option value="">Pilih Kategori</option>
-                        @foreach ($categorysuppliers as $categorysupplier)
+                        @foreach ($categorysuppliers as $categorysupplier )
                             <option value="{{ $categorysupplier->id }}" {{ old('category_supplier_id', $supplier->category_supplier_id ?? '') == $categorysupplier->id ? 'selected' : '' }}>{{ $categorysupplier->name }}</option>
                         @endforeach
                     </select>
@@ -47,18 +47,17 @@
                         <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                     @enderror
                 </div>
-
     
                 <div class="mb-4">
                     <label for="description" class="block text-teal-700 font-semibold mb-2">Deskripsi</label>
-                    <textarea name="description" id="description" class="w-full p-2 border border-teal-300 rounded-lg @error('description') border-red-500 @enderror" rows="4">{{ old('description', $categorysupplier->description) }}</textarea>
+                    <textarea name="description" id="description" class="w-full p-2 border border-teal-300 rounded-lg @error('description') border-red-500 @enderror" rows="4">{{ old('description', $supplier->description) }}</textarea>
                     @error('description')
                         <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                     @enderror
                 </div>
     
                 <div class="flex justify-end">
-                    <a href="/dashboard/categories" class="btn-danger mr-4">Batal</a>
+                    <a href="/dashboard/suppliers" class="btn-danger mr-4">Batal</a>
                     <button type="submit" class="btn-primary">Update</button>
                 </div>
             </form>

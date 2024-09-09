@@ -31,8 +31,8 @@
                     </ul>
                     <ul
                         class="flex justify-start group w-max lg:w-24 h-6 ml-4 hover:scale-110 transition duration-300 ease-in-out">
-                        <a class="right-nav text-white {{ Request::is('dashboard/media/billboards*') ? 'active' : '' }}"
-                            href="/dashboard/media/billboards">
+                        <a class="right-nav text-white {{ Request::is('dashboard/products*') ? 'active' : '' }}"
+                            href="/dashboard/products">
                             <svg class="fill-current w-5 mx-2" xmlns="http://www.w3.org/2000/svg" role="img"
                                 viewBox="0 0 24 24">
                                 <path d="M11.5 23l-8.5-4.535v-3.953l5.4 3.122 3.1-3.406v8.772zm1-.001v-8.806l3.162 3.343 5.338-2.958v3.887l-8.5 4.534zm-10.339-10.125l-2.161-1.244 3-3.302-3-2.823 8.718-4.505 3.215 2.385 3.325-2.385 8.742 4.561-2.995 2.771 2.995 3.443-2.242 1.241v-.001l-5.903 3.27-3.348-3.541 7.416-3.962-7.922-4.372-7.923 4.372 7.422 3.937v.024l-3.297 3.622-5.203-3.008-.16-.092-.679-.393v.002z"/>
@@ -42,8 +42,8 @@
                     </ul>
                     <ul
                         class="flex justify-start group w-max lg:w-24 ml-4 h-6 hover:scale-110 transition duration-300 ease-in-out">
-                        <a class="right-nav text-white {{ Request::is('dashboard/media/videotron*') ? 'active' : '' }}"
-                            href="/dashboard/media/videotrons">
+                        <a class="right-nav text-white {{ Request::is('dashboard/suppliers*') ? 'active' : '' }}"
+                            href="/dashboard/suppliers">
                             <svg class="fill-current w-5 mx-2" xmlns="http://www.w3.org/2000/svg" role="img"
                                 viewBox="0 0 24 24">
                                 <path d="M5 15.613c0-.788.061-1.243.992-1.458 1.074-.249 2.075-.466 1.591-1.381-1.476-2.785-.392-4.274 1.166-4.274 1.054 0 1.874.681 1.874 1.936 0 2.907-1.605 1.551-1.623 5.564v1h-4v-1.387zm14 1.387h-9v-1c0-1.373-.11-2.129 1.322-2.46 1.433-.331 2.27-.621 1.623-1.841-1.966-3.713-.521-5.699 1.555-5.699 2.117 0 3.527 2.062 1.556 5.699-.666 1.227.218 1.518 1.621 1.841 1.411.326 1.323 1.067 1.323 2.46v1zm-6 4.949v-2.949h-2v2.949c-4.717-.472-8.479-4.232-8.949-8.949h2.949v-2h-2.949c.47-4.718 4.232-8.479 8.949-8.95v2.95h2v-2.95c4.717.471 8.479 4.232 8.949 8.95h-2.949v2h2.949c-.47 4.717-4.232 8.477-8.949 8.949zm-1-21.949c-6.627 0-12 5.372-12 12 0 6.627 5.373 12 12 12s12-5.373 12-12c0-6.628-5.373-12-12-12z"/>

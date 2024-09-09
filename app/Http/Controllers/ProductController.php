@@ -41,7 +41,7 @@ class ProductController extends Controller
         $request->validate([
             'code' => 'required|string|max:225',
             'name' => 'required|string|max:225',
-            'description' => 'nullable',
+            'description' => 'nullable|string',
             'category_id' => 'required|exists:categories,id',
 
         ]);
@@ -84,7 +84,7 @@ class ProductController extends Controller
         $request->validate([
             'code' => 'required|string|max:225',
             'name' => 'required|string|max:225',
-            'description' => 'nullable|json',
+            'description' => 'nullable|string',
             'category_id' => 'required|exists:categories,id',
         ]);
 

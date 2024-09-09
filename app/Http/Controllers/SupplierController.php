@@ -71,8 +71,8 @@ class SupplierController extends Controller
         $categorysuppliers = CategorySupplier::all();
         return response()->view('dashboard.suppliers.edit', [
             'supplier' => $supplier,
-            'categorysupplier' => $categorysuppliers,
-            'title' => 'Edit Barang',
+            'categorysuppliers' => $categorysuppliers,
+            'title' => 'Edit Supplier',
         ]);
     }
 
@@ -90,7 +90,7 @@ class SupplierController extends Controller
 
         $supplier->update($request->all());
 
-        return redirect()->route('supplier.index')
+        return redirect()->route('suppliers.index')
                          ->with('success', 'Supplier berhasil diperbarui.');
     }
 
