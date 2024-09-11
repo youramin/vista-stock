@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Warehouse;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
@@ -7,8 +8,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\WarehouseController;
 use App\Http\Controllers\CategorySupplierController;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +32,7 @@ Route::resource('/dashboard/categories', CategoryController::class)->middleware(
 Route::resource('/dashboard/products', ProductController::class)->middleware(['auth','user_access']);
 Route::resource('/dashboard/categorysuppliers', CategorySupplierController::class)->middleware(['auth','user_access']);
 Route::resource('/dashboard/suppliers', SupplierController::class)->middleware(['auth','user_access']);
+Route::resource('/dashboard/warehouses', WarehouseController::class)->middleware(['auth','user_access']);
 
 
 

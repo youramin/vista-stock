@@ -135,6 +135,23 @@
                         </div>
                         <!-- Sidebar Supplier End-->
 
+                        <!-- Sidebar Gudang start-->
+                        <div class="nav-a mx-2">
+                            <a class="nav-a" href="/dashboard/warehouses">
+                                <svg class="nav-svg transition duration-300 ease-in-out {{ Request::is('dashboard/warehouses*') ? 'active' : '' }}"
+                                    role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <title> Gudang</title>
+                                    <path d="M17.059 17.926l-3.995-4.318c-1.067-1.068-.04-2.262 2.54-2.52 0 0-1.428-.703-3.019-.703-.808 0-1.657.181-2.384.728-1.224.921-.973 1.658-1.525 2.21-.507.507-1.114.074-1.114.074l-.875.875 2.474 2.473.874-.875s-.361-.622.037-1.019c.282-.281.822-.412 1.285.052.195.194 4.148 4.353 4.148 4.353 1.078 1.078 2.363-.522 1.554-1.33zm6.941-4.925h-3v10h-18v-10h-3l12-12.001 12 12.001zm-4-5.424l-3-3v-2.576h3v5.576z"/>
+                                </svg>
+                            </a>
+                            <li id="liDashboard" data-name="liDashboard" class="group hidden">
+                                <a href="/dashboard/warehouses" class="nav-a mx-2 {{ Request::is('dashboard/warehouses*') ? 'active' : '' }}">
+                                    <span class="flex w-40"> Gudang </span>
+                                </a>
+                            </li>
+                        </div>
+                        <!-- Sidebar Gudang End-->
+
                         <!-- Sidebar Mutasi Barang start-->
                         <div class="div-nav-a">
                             <a class="nav-a" href="">

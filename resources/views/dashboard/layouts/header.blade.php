@@ -51,6 +51,17 @@
                             <span class="lg:flex hidden"> Supplier </span>
                         </a>
                     </ul>
+                    <ul
+                        class="flex justify-start group w-max lg:w-24 ml-4 h-6 hover:scale-110 transition duration-300 ease-in-out">
+                        <a class="right-nav text-white {{ Request::is('dashboard/warehouses*') ? 'active' : '' }}"
+                            href="/dashboard/warehouses">
+                            <svg class="fill-current w-5 mx-2" xmlns="http://www.w3.org/2000/svg" role="img"
+                                viewBox="0 0 24 24">
+                                <path d="M17.059 17.926l-3.995-4.318c-1.067-1.068-.04-2.262 2.54-2.52 0 0-1.428-.703-3.019-.703-.808 0-1.657.181-2.384.728-1.224.921-.973 1.658-1.525 2.21-.507.507-1.114.074-1.114.074l-.875.875 2.474 2.473.874-.875s-.361-.622.037-1.019c.282-.281.822-.412 1.285.052.195.194 4.148 4.353 4.148 4.353 1.078 1.078 2.363-.522 1.554-1.33zm6.941-4.925h-3v10h-18v-10h-3l12-12.001 12 12.001zm-4-5.424l-3-3v-2.576h3v5.576z"/>
+                            </svg>
+                            <span class="lg:flex hidden"> Gudang </span>
+                        </a>
+                    </ul>
                     <ul class="flex justify-start group w-max ml-4 h-6 hover:scale-110 transition duration-300 ease-in-out">
                         <a class="right-nav text-white {{ Request::is('dashboard/media/signages*') ? 'active' : '' }}"
                             href="/dashboard/media/signages">
