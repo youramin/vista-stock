@@ -12,4 +12,7 @@ class Product extends Model
     public function category(){
         return $this->belongsTo(Category::class);
     }
+    public function purchases(){
+        return $this->hasMany(Purchase::class, 'product_id', 'id');
+    }
 }

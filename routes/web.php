@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\WarehouseController;
@@ -33,6 +34,10 @@ Route::resource('/dashboard/products', ProductController::class)->middleware(['a
 Route::resource('/dashboard/categorysuppliers', CategorySupplierController::class)->middleware(['auth','user_access']);
 Route::resource('/dashboard/suppliers', SupplierController::class)->middleware(['auth','user_access']);
 Route::resource('/dashboard/warehouses', WarehouseController::class)->middleware(['auth','user_access']);
+Route::resource('/dashboard/purchases', PurchaseController::class)->middleware(['auth','user_access']);
+Route::get('/products/{categoryId}', [ProductController::class, 'getProductsByCategory']);
+
+
 
 
 

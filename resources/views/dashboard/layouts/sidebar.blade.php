@@ -145,7 +145,7 @@
                                 </svg>
                             </a>
                             <li id="liDashboard" data-name="liDashboard" class="group hidden">
-                                <a href="/dashboard/warehouses" class="nav-a mx-2 {{ Request::is('dashboard/warehouses*') ? 'active' : '' }}">
+                                <a href="#" class="nav-a mx-2 {{ Request::is('dashboard/warehouses*') ? 'active' : '' }}">
                                     <span class="flex w-40"> Gudang </span>
                                 </a>
                             </li>
@@ -154,7 +154,7 @@
 
                         <!-- Sidebar Mutasi Barang start-->
                         <div class="div-nav-a">
-                            <a class="nav-a" href="">
+                            <a class="nav-a {{ Request::is('dashboard/purchases*') ? 'active' : '' }}" href="/dashboard/purchases" >
                                 <svg role="img" class="nav-svg transition duration-300 ease-in-out"
                                     viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <title>Mutasi Barang</title>
@@ -164,7 +164,7 @@
                             <li id="liAccounting" name="liAccounting" class="group hidden"
                                 onclick="showHideDropdown(this)">
                                 <a href="#"
-                                    class="nav-a mx-2 {{ Request::is('dashboard/accounting*') ? 'active' : '' }}">
+                                    class="nav-a mx-2 {{ Request::is('dashboard/purchases*') ? 'active' : '' }}">
                                     <span class="flex w-40"> Mutasi Barang </span>
                                     <svg id="accountingArrow" name="accountingArrow"
                                         class="svg-arrow rotate-180 transition duration-300 ease-in-out" role="img"
@@ -178,7 +178,7 @@
                                 <ul id="accountingChild" name="accountingChild" class="hidden">
                                     <!-- Pembelian Start -->
                                     <li id="penagihan" name="penagihan" class="group">
-                                        <a class="nav-a ml-2 border-t-[1px]" href="#">
+                                        <a class="nav-a ml-2 border-t-[1px] {{ Request::is('dashboard/purchases*') ? 'active' : '' }}" href="/dashboard/purchases">
                                             <svg class="child-nav-svg" role="img" fill="#000000"
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 viewBox="0 0 24 24"fill-rule="evenodd" clip-rule="evenodd">
