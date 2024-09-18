@@ -38,8 +38,27 @@ class SupplierController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        // Set code --> start
+        $dataCategory = Supplier::all()->last();
+        if($dataCategory){
+            $lastCode = (int)substr($dataCategory->code,4,3);
+            $newCode = $lastCode + 1;
+        } else {
+            $newCode = 1;
+        }
+        
+
+        if($newCode < 10 ){
+            $code = 'SPR-00'.$newCode;
+        } else {
+            $code = 'SPR-0'.$newCode;
+        }
+        // Set code --> end
+
+        $request->request->add(['code' => $code]);
+
         $request->validate([
-            'code' => 'required|string|max:225',
+            'code' => 'required|unique:suppliers',
             'name' => 'required|string|max:225',
             'description' => 'nullable|string',
             'category_supplier_id' => 'required|exists:category_suppliers,id',

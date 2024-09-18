@@ -18,7 +18,7 @@
 
             <div class="card">
                 <div class="card-header">
-                    Detail Nota Pembelian
+                    Detail Data Pembelian
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">Nomor Nota: {{ $purchase->purchase_number }}</h5>

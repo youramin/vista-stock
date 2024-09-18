@@ -52,8 +52,8 @@
                     <tr class="bg-teal-100 h-10">
                         <th class="text-teal-700 border text-sm w-8 text-center">No</th>
                         <th class="text-teal-700 border text-sm w-24 text-center">Kode Kategori</th>
-                        <th class="text-teal-700 border text-sm text-center">Nama Kategori</th>
-                        <th class="text-teal-700 border text-sm text-center w-20">Deskripsi</th>
+                        <th class="text-teal-700 border text-sm text-center w-25">Nama Kategori</th>
+                        <th class="text-teal-700 border text-sm text-center">Deskripsi</th>
                         <th class="text-teal-700 border text-sm text-center w-32">Action</th>
                     </tr>
                 </thead>

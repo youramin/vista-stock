@@ -27,14 +27,6 @@
                 </div>
     
                 <div class="mb-4">
-                    <label for="code" class="block text-teal-700 font-semibold mb-2">Kode Kategori</label>
-                    <input type="text" name="code" id="code" class="w-full p-2 border border-teal-300 rounded-lg @error('code') border-red-500 @enderror" value="{{ old('code') }}" required>
-                    @error('code')
-                        <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
-    
-                <div class="mb-4">
                     <label for="description" class="block text-teal-700 font-semibold mb-2">Deskripsi</label>
                     <textarea name="description" id="description" class="w-full p-2 border border-teal-300 rounded-lg @error('description') border-red-500 @enderror" rows="4">{{ old('description') }}</textarea>
                     @error('description')

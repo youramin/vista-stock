@@ -25,14 +25,6 @@
                         <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                     @enderror
                 </div>
-                
-                <div class="mb-4">
-                    <label for="code" class="block text-teal-700 font-semibold mb-2">Kode Supplier</label>
-                    <input type="text" name="code" id="code" class="w-full p-2 border border-teal-300 rounded-lg @error('code') border-red-500 @enderror" value="{{ old('code') }}" required>
-                    @error('code')
-                        <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
 
                 <div class="mb-4">
                     <label for="category_supplier_id" class="block text-teal-700 font-semibold mb-2">Kategori supplier</label>

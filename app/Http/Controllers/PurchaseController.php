@@ -84,7 +84,7 @@ class PurchaseController extends Controller
         }
 
         return redirect()->route('purchases.index')
-                        ->with('success', 'Nota pembelian berhasil disimpan.');
+                        ->with('success', 'Data pembelian berhasil disimpan.');
     }
 
 
@@ -95,7 +95,7 @@ class PurchaseController extends Controller
 
         return view('dashboard.purchases.show', [
             'purchase' => $purchase->load('supplier', 'warehouse', 'products.category'),
-            'title' => 'Detail Nota'
+            'title' => 'Detail Pembelian'
         ]);
     }
 
@@ -107,7 +107,7 @@ class PurchaseController extends Controller
         $suppliers = Supplier::all();
         $warehouses = Warehouse::all();
         return response()-> view ('dashboard.purchases.edit', [
-            'title' => 'Edit nota pembelian',
+            'title' => 'Edit data pembelian',
             'purchase' => $purchase,
             'products' => $products,
             'categories' => $categories,
@@ -154,7 +154,7 @@ class PurchaseController extends Controller
         }
 
         return redirect()->route('purchases.index')
-                         ->with('success', 'Nota pembelian berhasil diperbarui.');
+                         ->with('success', 'Data pembelian berhasil diperbarui.');
     }
 
 
@@ -163,7 +163,7 @@ class PurchaseController extends Controller
         $purchase->delete();
 
         return redirect()->route('purchases.index')
-                         ->with('success', 'Nota berhasil dihapus.');
+                         ->with('success', 'Data pembelian berhasil dihapus.');
     }
 
     

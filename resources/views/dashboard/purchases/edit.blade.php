@@ -18,7 +18,7 @@
 
         <!-- Edit Purchase Form -->
         <div class="w-[1200px] mt-5 bg-white shadow-md rounded-lg p-5">
-            <h2 class="text-2xl font-semibold mb-4">Edit Nota Pembelian</h2>
+            <h2 class="text-2xl font-semibold mb-4">Edit Data Pembelian</h2>
             
             <form action="{{ route('purchases.update', $purchase->id) }}" method="POST">
                 @csrf

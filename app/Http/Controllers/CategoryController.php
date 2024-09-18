@@ -35,8 +35,28 @@ class CategoryController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+
+        // Set code --> start
+        $dataCategory = Category::all()->last();
+        if($dataCategory){
+            $lastCode = (int)substr($dataCategory->code,4,3);
+            $newCode = $lastCode + 1;
+        } else {
+            $newCode = 1;
+        }
+        
+
+        if($newCode < 10 ){
+            $code = 'CAT-00'.$newCode;
+        } else {
+            $code = 'CAT-0'.$newCode;
+        }
+        // Set code --> end
+
+        $request->request->add(['code' => $code]);
+
         $request->validate([
-            'code' => 'required|string|max:225',
+            'code' => 'required|unique:categories',
             'name' => 'required|string|max:225',
             'description' => 'nullable|string',
         ]);

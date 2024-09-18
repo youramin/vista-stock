@@ -35,8 +35,27 @@ class CategorySupplierController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        // Set code --> start
+        $dataCategory = CategorySupplier::all()->last();
+        if($dataCategory){
+            $lastCode = (int)substr($dataCategory->code,4,3);
+            $newCode = $lastCode + 1;
+        } else {
+            $newCode = 1;
+        }
+        
+
+        if($newCode < 10 ){
+            $code = 'CSP-00'.$newCode;
+        } else {
+            $code = 'CSP-0'.$newCode;
+        }
+        // Set code --> end
+
+        $request->request->add(['code' => $code]);
+
         $request->validate([
-            'code' => 'required|string|max:225',
+            'code' => 'required|unique:category_suppliers',
             'name' => 'required|string|max:225',
             'description' => 'nullable|string',
         ]);

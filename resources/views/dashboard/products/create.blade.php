@@ -27,14 +27,6 @@
                 </div>
                 
                 <div class="mb-4">
-                    <label for="code" class="block text-teal-700 font-semibold mb-2">Kode Barang</label>
-                    <input type="text" name="code" id="code" class="w-full p-2 border border-teal-300 rounded-lg @error('code') border-red-500 @enderror" value="{{ old('code') }}" required>
-                    @error('code')
-                        <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                <div class="mb-4">
                     <label for="category_id" class="block text-teal-700 font-semibold mb-2">Kategori Barang</label>
                     <select name="category_id" id="category_id" class="w-full p-2 border border-teal-300 rounded-lg @error('category_id') border-red-500 @enderror">
                         <option value="">Pilih Kategori</option>
