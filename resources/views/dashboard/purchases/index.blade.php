@@ -28,6 +28,7 @@
                     <thead>
                         <tr class="text-gray-700 bg-gray-200">
                             <th class="px-4 py-2">Tanggal Pembelian</th>
+                            <th class="px-4 py-2">Ringkasan Produk</th>
                             <th class="text-center">Aksi</th>
                         </tr>
                     </thead>
@@ -36,6 +37,16 @@
                         <tr class="border-t">
                             <td class="px-4 py-2">
                                 {{ \Carbon\Carbon::parse($purchase->purchase_date)->format('d F Y') }}
+                            </td>
+        
+                            <!-- Ringkasan Produk -->
+                            <td class="px-4 py-2">
+                                @php
+                                    $productSummary = $purchase->products->map(function($product) {
+                                        return $product->name . ' (' . $product->pivot->quantity . ')';
+                                    })->join(', ');
+                                @endphp
+                                {{ $productSummary }}
                             </td>
                             <td class="text-center">
                                 <div class="flex justify-center space-x-2">
@@ -59,7 +70,7 @@
                                         @method('DELETE')
                                         <button type="submit" class="index-link bg-red-600 hover:bg-red-700 text-white rounded p-1">
                                             <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="m4.015 5.494h-.253c-.413 0-.747-.335-.747-.747s.334-.747.747-.747h5.253v-1c0-.535.474-1 1-1h4c.526 0 1 .465 1 1v1h5.254c.412 0 .746.335.746.747s-.334.747-.746.747h-.254v15.435c0 .591-.448 1.071-1 1.071-2.873 0-11.127 0-14 0-.552 0-1-.48-1-1.071zm14.5 0h-13v15.006h13zm-4.25 2.506c-.414 0-.75.336-.75.75v8.5c0 .414.336.75.75.75s.75-.336.75-.75v-8.5c0-.414-.336-.75-.75-.75zm-4.5 0c-.414 0-.75.336-.75.75v8.5c0 .414.336.75.75.75s.75-.336.75-.75v-8.5c0-.414-.336-.75-.75-.75zm3.75-4v-.5h-3v.5z" fill-rule="nonzero"/>
+                                                <path d="m4.015 5.494h-.253c-.413 0-.747-.335-.747-.747s.334-.747.747-.747h5.253v-1c0-.535.474-1 1-1h4c.526 0 1 .465 1 1v1h5.254c.412 0 .746.335.746.747s-.334.747-.746.747h-.254v15.435c0 .591-.448 1.071-1 1.071-2.873 0-11.127 0-14 0-.552 0-1-.48-1-1.071zm1.508 0v14.506h13.077v-14.506zm3.87-2v1zm2 0h4v-1zm-.486 13.633v-9.527c0-.392.305-.711.677-.711s.677.32.677.711v9.527c0 .392-.305.711-.677.711s-.677-.32-.677-.711zm4.358-.002v-9.527c0-.392.306-.71.677-.71.373 0 .677.319.677.71v9.527c0 .392-.305.711-.677.711s-.677-.319-.677-.711z" />
                                             </svg>
                                         </button>
                                     </form>
@@ -74,4 +85,3 @@
     </div>
 </div>
 @endsection
-

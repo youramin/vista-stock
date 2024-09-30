@@ -55,8 +55,8 @@ class PurchaseController extends Controller
             'purchase_number' => 'required|string',
             'supplier_id' => 'required|exists:suppliers,id',
             'warehouse_id' => 'required|exists:warehouses,id',
-            'categories' => 'required|array',
-            'categories.*' => 'required|exists:categories,id',
+            'category_id' => 'required|array',
+            'category_id.*' => 'required|exists:categories,id',
             'products' => 'required|array',
             'products.*' => 'required|exists:products,id',
             'quantities' => 'required|array',
@@ -90,11 +90,9 @@ class PurchaseController extends Controller
 
     public function show(Purchase $purchase)
     {
-       
-        
-
+        $purchase->load('supplier', 'warehouse', 'products.category', 'user');
         return view('dashboard.purchases.show', [
-            'purchase' => $purchase->load('supplier', 'warehouse', 'products.category'),
+            'purchase' => $purchase,
             'title' => 'Detail Pembelian'
         ]);
     }

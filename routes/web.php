@@ -36,6 +36,8 @@ Route::resource('/dashboard/suppliers', SupplierController::class)->middleware([
 Route::resource('/dashboard/warehouses', WarehouseController::class)->middleware(['auth','user_access']);
 Route::resource('/dashboard/purchases', PurchaseController::class)->middleware(['auth','user_access']);
 Route::get('/products/{categoryId}', [ProductController::class, 'getProductsByCategory']);
+Route::get('/dashboard/purchases/{purchase}', [PurchaseController::class, 'show'])->name('purchases.show');
+
 
 
 

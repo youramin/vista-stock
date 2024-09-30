@@ -7,11 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Purchase extends Model
 {
-    protected $guarded = ['id'];
 
+    protected $guarded = ['id'];
+    
     protected $casts = [
         'purchase_date' => 'date',
     ];
+
+    protected $fillable = ['purchase_date', 'supplier_id', 'warehouse_id', 'user_id', 'purchase_number'];
         
     public function category(){
         return $this->belongsTo(Category::class);
