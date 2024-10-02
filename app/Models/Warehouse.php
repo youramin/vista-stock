@@ -9,4 +9,8 @@ class Warehouse extends Model
 {
     protected $guarded = ['id'];
 
+    public function purchases(){
+        return $this->hasMany(Purchase::class, 'warehouse_id', 'id');
+    }
+
 }

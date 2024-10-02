@@ -13,16 +13,13 @@ class Purchase extends Model
     protected $casts = [
         'purchase_date' => 'date',
     ];
-
-    protected $fillable = ['purchase_date', 'supplier_id', 'warehouse_id', 'user_id', 'purchase_number'];
         
     public function category(){
         return $this->belongsTo(Category::class);
     }
     public function products()
     {
-        return $this->belongsToMany(Product::class, 'purchase_product')
-                    ->withPivot('quantity', 'unit_price', 'total_price');
+        return $this->belongsToMany(Product::class);
     }
     public function warehouse(){
         return $this->belongsTo(Warehouse::class);

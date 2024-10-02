@@ -13,4 +13,8 @@ class Supplier extends Model
     public function categorysupplier(){
         return $this->belongsTo(CategorySupplier::class, 'category_supplier_id', 'id');
     }
+
+    public function purchases(){
+        return $this->hasMany(Purchase::class, 'supplier_id', 'id');
+    }
 }

@@ -16,10 +16,7 @@ return new class extends Migration
             $table->string('purchase_number');
             $table->date('purchase_date');
             $table->foreignId('category_id')->constrained();
-            $table->foreignId('product_id')->constrained();
-            $table->integer('quantity');
-            $table->decimal('unit_price', 10, 2);
-            $table->decimal('total_price', 10, 2);
+            $table->json('products');
             $table->string('description')->nullable();
             $table->foreignId('warehouse_id')->constrained();
             $table->foreignId('supplier_id')->constrained();

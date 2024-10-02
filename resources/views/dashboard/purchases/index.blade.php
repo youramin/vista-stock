@@ -27,6 +27,7 @@
                 <table class="table-auto w-full text-left">
                     <thead>
                         <tr class="text-gray-700 bg-gray-200">
+                            <th class="px-4 py-2">No. Pembelian</th>
                             <th class="px-4 py-2">Tanggal Pembelian</th>
                             <th class="px-4 py-2">Ringkasan Produk</th>
                             <th class="text-center">Aksi</th>
@@ -36,17 +37,38 @@
                         @foreach($purchases as $purchase)
                         <tr class="border-t">
                             <td class="px-4 py-2">
+                                {{ $purchase->purchase_number }}
+                            </td>
+                            <td class="px-4 py-2">
                                 {{ \Carbon\Carbon::parse($purchase->purchase_date)->format('d F Y') }}
                             </td>
         
                             <!-- Ringkasan Produk -->
                             <td class="px-4 py-2">
                                 @php
+                                    $dataProducts = json_decode($purchase->products);
+                                @endphp
+                                <div>
+                                @foreach ($dataProducts as $dataProduct)
+                                    @foreach ($products as $product)
+                                        @if ($dataProduct->id == $product->id)
+                                            <div class="flex">
+                                                {{-- <label for="">{{ $product->id }}</label> --}}
+                                                <label class="ml-2">{{ $product->name }}</label>
+                                                {{-- <label class="ml-2">{{ $dataProduct->quantity }}</label>
+                                                <label class="ml-2">{{ $dataProduct->unit_price }}</label>
+                                                <label class="ml-2">{{ $dataProduct->total_price }}</label> --}}
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                @endforeach
+                            </div>
+                                {{-- @php
                                     $productSummary = $purchase->products->map(function($product) {
                                         return $product->name . ' (' . $product->pivot->quantity . ')';
                                     })->join(', ');
                                 @endphp
-                                {{ $productSummary }}
+                                {{ $productSummary }} --}}
                             </td>
                             <td class="text-center">
                                 <div class="flex justify-center space-x-2">

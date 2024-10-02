@@ -59,7 +59,7 @@
                         <tbody id="product-table">
                             <tr>
                                 <td class="px-4 py-2">
-                                    <select name="categories[]" class="w-full p-2 border rounded category-select" required>
+                                    <select name="category_id" class="w-full p-2 border rounded category-select" required>
                                         <option value="">Pilih Kategori</option>
                                         @foreach($categories as $category)
                                             <option value="{{ $category->id }}">{{ $category->name }}</option>

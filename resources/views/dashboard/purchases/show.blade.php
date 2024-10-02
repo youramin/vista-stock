@@ -61,19 +61,22 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @if ($purchase->products->isEmpty())
-                        <p>Tidak ada produk terkait dengan pembelian ini.</p>
-                    @else
-                        @foreach ($purchase->products as $product)
+                    @php
+                        $dataProducts = json_decode($purchase->products);
+                    @endphp
+                        @foreach ($dataProducts as $dataProduct)
+                        @foreach ($products as $product)
+                        @if ($dataProduct->id == $product->id)
                             <tr>
-                                <td>{{ optional($product->category)->name ?? 'Tidak ada kategori' }}</td>
-                                <td>{{ $product->name }}</td>
-                                <td>{{ $product->pivot->quantity }}</td>
-                                <td>{{ $product->unit_price }}</td>
-                                <td>{{ $product->total_price }}</td>
+                                <td class="px-4 py-2">{{ $purchase->category->name }}</td>
+                                <td class="px-4 py-2">{{ $product->name }}</td>
+                                <td class="px-4 py-2">{{ $dataProduct->quantity }}</td>
+                                <td class="px-4 py-2">{{ $dataProduct->unit_price }}</td>
+                                <td class="px-4 py-2">{{ $dataProduct->total_price }}</td>
                             </tr>
+                            @endif
                         @endforeach
-                    @endif
+                        @endforeach
                 </tbody>
             </table>
         </div>
