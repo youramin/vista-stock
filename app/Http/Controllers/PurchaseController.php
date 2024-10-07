@@ -116,39 +116,32 @@ class PurchaseController extends Controller
     
     public function update(Request $request, Purchase $purchase): RedirectResponse
     {
-        $request->validate([
-            'purchase_date' => 'required|date',
-            'purchase_number' => 'required|string',
-            'supplier_id' => 'required|exists:suppliers,id',
-            'warehouse_id' => 'required|exists:warehouses,id',
-            'categories' => 'required|array',
-            'categories.*' => 'required|exists:categories,id',
-            'products' => 'required|array',
-            'products.*' => 'required|exists:products,id',
-            'quantities' => 'required|array',
-            'quantities.*' => 'required|integer|min:1',
-            'unit_prices' => 'required|array',
-            'unit_prices.*' => 'required|numeric|min:0',
-            'total_prices' => 'required|array',
-            'total_prices.*' => 'required|numeric|min:0',
+        $index = 0;
+        $dataProducts = [];
+        foreach ($request->products as $product){
+            $dataProduct = new stdClass();
+            $dataProduct->id = $product;
+            $dataProduct->quantity = $request->quantities[$index];
+            $dataProduct->unit_price = $request->unit_prices[$index];
+            $dataProduct->total_price = $request->total_prices[$index];
+            array_push($dataProducts, $dataProduct);
+            $index++;
+        };
+        
+        $request->request->add(['user_id' => auth()->user()->id]);
+        $validateData = $request->validate([
+            'purchase_date' => 'required',
+            'purchase_number' => 'required',
+            'supplier_id' => 'required',
+            'warehouse_id' => 'required',
+            'user_id' => 'required',
+            'category_id' => 'required'
         ]);
 
-        $purchase->details()->delete();
+        $validateData['products'] = json_encode((object)$dataProducts);
+        // dd($validateData);
+        Purchase::create($validateData);
 
-        foreach ($request->products as $index => $productId) {
-            Purchase::create([
-                'purchase_date' => $request->purchase_date,
-                'purchase_number' => $request->purchase_number,
-                'supplier_id' => $request->supplier_id,
-                'warehouses_id' => $request->warehouse_id,
-                'category_id' => $request->categories[$index],
-                'product_id' => $productId,
-                'quantity' => $request->quantities[$index],
-                'unit_price' => $request->unit_prices[$index],
-                'total_price' => $request->total_prices[$index],
-                'user_id' => auth()->user()->id,
-            ]);
-        }
 
         return redirect()->route('purchases.index')
                          ->with('success', 'Data pembelian berhasil diperbarui.');

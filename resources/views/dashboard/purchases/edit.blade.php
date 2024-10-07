@@ -24,6 +24,7 @@
                 @csrf
                 @method('PUT')
                 
+                <!-- Tanggal Pembelian -->
                 <div class="mb-4">
                     <label for="purchase_date" class="block text-gray-700">Tanggal Pembelian</label>
                     <input type="date" name="purchase_date" id="purchase_date" value="{{ old('purchase_date', $purchase->purchase_date) }}" class="w-full mt-1 p-2 border rounded @error('purchase_date') border-red-500 @enderror" required>
@@ -32,6 +33,7 @@
                     @enderror
                 </div>
 
+                <!-- Nomor Pembelian -->
                 <div class="mb-4">
                     <label for="purchase_number" class="block text-gray-700">Nomor Pembelian</label>
                     <input type="text" name="purchase_number" id="purchase_number" value="{{ old('purchase_number', $purchase->purchase_number) }}" class="w-full mt-1 p-2 border rounded @error('purchase_number') border-red-500 @enderror" required>
@@ -40,14 +42,13 @@
                     @enderror
                 </div>
 
+                <!-- Supplier -->
                 <div class="mb-4">
-                    <label for="supplier_id" class="block text-gray-700">Penyedia</label>
+                    <label for="supplier_id" class="block text-gray-700">Supplier</label>
                     <select name="supplier_id" id="supplier_id" class="w-full mt-1 p-2 border rounded @error('supplier_id') border-red-500 @enderror" required>
                         <option value="">Pilih Penyedia</option>
                         @foreach ($suppliers as $supplier)
-                            <option value="{{ $supplier->id }}" {{ old('supplier_id', $purchase->supplier_id) == $supplier->id ? 'selected' : '' }}>
-                                {{ $supplier->name }}
-                            </option>
+                            <option value="{{ $supplier->id }}" {{ old('supplier_id', $purchase->supplier_id) == $supplier->id ? 'selected' : '' }}>{{ $supplier->name }}</option>
                         @endforeach
                     </select>
                     @error('supplier_id')
@@ -55,14 +56,13 @@
                     @enderror
                 </div>
 
+                <!-- Gudang -->
                 <div class="mb-4">
                     <label for="warehouse_id" class="block text-gray-700">Gudang</label>
                     <select name="warehouse_id" id="warehouse_id" class="w-full mt-1 p-2 border rounded @error('warehouse_id') border-red-500 @enderror" required>
                         <option value="">Pilih Gudang</option>
                         @foreach ($warehouses as $warehouse)
-                            <option value="{{ $warehouse->id }}" {{ old('warehouse_id', $purchase->warehouse_id) == $warehouse->id ? 'selected' : '' }}>
-                                {{ $warehouse->name }}
-                            </option>
+                            <option value="{{ $warehouse->id }}" {{ old('warehouse_id', $purchase->warehouse_id) == $warehouse->id ? 'selected' : '' }}>{{ $warehouse->name }}</option>
                         @endforeach
                     </select>
                     @error('warehouse_id')
@@ -70,62 +70,70 @@
                     @enderror
                 </div>
 
+                <!-- Produk -->
                 <div id="products-container">
-                    @foreach ($purchase->products as $index => $product)
-                    <div class="mb-4 product-row">
-                        <label for="categories[{{ $index }}]" class="block text-gray-700">Kategori Produk {{ $index + 1 }}</label>
-                        <select name="categories[{{ $index }}]" id="categories[{{ $index }}]" class="w-full mt-1 p-2 border rounded @error('categories.' . $index) border-red-500 @enderror" required>
-                            <option value="">Pilih Kategori</option>
-                            @foreach ($categories as $category)
-                                <option value="{{ $category->id }}" {{ old('categories.' . $index, $product->category_id) == $category->id ? 'selected' : '' }}>
-                                    {{ $category->name }}
-                                </option>
-                            @endforeach
-                        </select>
-                        @error('categories.' . $index)
-                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                        @enderror
+                    @php
+                        $dataProducts = json_decode($purchase->products);
+                    @endphp
+                    @foreach ($dataProducts as $index => $dataProduct)
+                        <div class="mb-4 product-row">
+                            <!-- Kategori Produk -->
+                            <label for="categories[{{ $index }}]" class="block text-gray-700">Kategori Produk {{ $index + 1 }}</label>
+                            <select name="categories[{{ $index }}]" id="categories[{{ $index }}]" class="w-full mt-1 p-2 border rounded @error('categories.' . $index) border-red-500 @enderror" required>
+                                <option value="">Pilih Kategori</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}" {{ old('categories.' . $index, $dataProduct->category_id ?? '') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('categories.' . $index)
+                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                            @enderror
 
-                        <label for="products[{{ $index }}]" class="block text-gray-700">Produk {{ $index + 1 }}</label>
-                        <select name="products[{{ $index }}]" id="products[{{ $index }}]" class="w-full mt-1 p-2 border rounded @error('products.' . $index) border-red-500 @enderror" required>
-                            <option value="">Pilih Produk</option>
-                            @foreach ($products as $productOption)
-                                <option value="{{ $productOption->id }}" {{ old('products.' . $index, $product->product_id) == $productOption->id ? 'selected' : '' }}>
-                                    {{ $productOption->name }}
-                                </option>
-                            @endforeach
-                        </select>
-                        @error('products.' . $index)
-                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                        @enderror
+                            <!-- Produk -->
+                            <label for="products[{{ $index }}]" class="block text-gray-700">Produk {{ $index + 1 }}</label>
+                            <select name="products[{{ $index }}]" id="products[{{ $index }}]" class="w-full mt-1 p-2 border rounded @error('products.' . $index) border-red-500 @enderror" required>
+                                <option value="">Pilih Produk</option>
+                                @foreach ($products as $product)
+                                    <option value="{{ $product->id }}" {{ old('products.' . $index, $dataProduct->id) == $product->id ? 'selected' : '' }}>{{ $product->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('products.' . $index)
+                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                            @enderror
 
-                        <label for="quantities[{{ $index }}]" class="block text-gray-700">Kuantitas {{ $index + 1 }}</label>
-                        <input type="number" name="quantities[{{ $index }}]" id="quantities[{{ $index }}]" value="{{ old('quantities.' . $index, $product->quantity) }}" class="w-full mt-1 p-2 border rounded @error('quantities.' . $index) border-red-500 @enderror" required>
-                        @error('quantities.' . $index)
-                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                        @enderror
+                            <!-- Kuantitas -->
+                            <label for="quantities[{{ $index }}]" class="block text-gray-700">Kuantitas {{ $index + 1 }}</label>
+                            <input type="number" name="quantities[{{ $index }}]" id="quantities[{{ $index }}]" value="{{ old('quantities.' . $index, $dataProduct->quantity) }}" class="w-full mt-1 p-2 border rounded @error('quantities.' . $index) border-red-500 @enderror" required>
+                            @error('quantities.' . $index)
+                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                            @enderror
 
-                        <label for="unit_prices[{{ $index }}]" class="block text-gray-700">Harga Satuan {{ $index + 1 }}</label>
-                        <input type="number" step="0.01" name="unit_prices[{{ $index }}]" id="unit_prices[{{ $index }}]" value="{{ old('unit_prices.' . $index, $product->unit_price) }}" class="w-full mt-1 p-2 border rounded @error('unit_prices.' . $index) border-red-500 @enderror" required>
-                        @error('unit_prices.' . $index)
-                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                        @enderror
+                            <!-- Harga Satuan -->
+                            <label for="unit_prices[{{ $index }}]" class="block text-gray-700">Harga Satuan {{ $index + 1 }}</label>
+                            <input type="number" step="0.01" name="unit_prices[{{ $index }}]" id="unit_prices[{{ $index }}]" value="{{ old('unit_prices.' . $index, $dataProduct->unit_price) }}" class="w-full mt-1 p-2 border rounded @error('unit_prices.' . $index) border-red-500 @enderror" required>
+                            @error('unit_prices.' . $index)
+                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                            @enderror
 
-                        <label for="total_prices[{{ $index }}]" class="block text-gray-700">Harga Total {{ $index + 1 }}</label>
-                        <input type="number" step="0.01" name="total_prices[{{ $index }}]" id="total_prices[{{ $index }}]" value="{{ old('total_prices.' . $index, $product->total_price) }}" class="w-full mt-1 p-2 border rounded @error('total_prices.' . $index) border-red-500 @enderror" readonly>
-                        @error('total_prices.' . $index)
-                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                        @enderror
-                        
-                        <button type="button" class="remove-row mt-2 bg-red-500 text-white p-2 rounded">Hapus Baris</button>
-                    </div>
+                            <!-- Harga Total -->
+                            <label for="total_prices[{{ $index }}]" class="block text-gray-700">Harga Total {{ $index + 1 }}</label>
+                            <input type="number" step="0.01" name="total_prices[{{ $index }}]" id="total_prices[{{ $index }}]" value="{{ old('total_prices.' . $index, $dataProduct->total_price) }}" class="w-full mt-1 p-2 border rounded @error('total_prices.' . $index) border-red-500 @enderror" readonly>
+                            @error('total_prices.' . $index)
+                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                            @enderror
+
+                            <!-- Hapus Baris -->
+                            <button type="button" class="remove-row mt-2 bg-red-500 text-white p-2 rounded">Hapus Baris</button>
+                        </div>
                     @endforeach
                 </div>
-                
-                <button type="button" id="add-product-row" class="mt-4 bg-blue-500 text-white p-2 rounded">Tambah Baris Produk</button>
 
-                <div class="mt-6 flex justify-end">
-                    <button type="submit" class="bg-green-500 text-white p-2 rounded">Simpan Perubahan</button>
+                <!-- Tambah Produk Button -->
+                <button type="button" id="add-product" class="bg-blue-500 text-white p-2 rounded">Tambah Produk</button>
+
+                <!-- Submit Button -->
+                <div class="mt-6">
+                    <button type="submit" class="bg-green-500 text-white p-3 rounded-lg">Simpan Pembelian</button>
                 </div>
             </form>
         </div>

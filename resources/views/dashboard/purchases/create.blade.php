@@ -56,6 +56,7 @@
                                 <th class="px-4 py-2">Total Harga</th>
                             </tr>
                         </thead>
+                        <p class="text-red-500 text-xs mb-2">Masukkan nominal angka tanpa titik atau simbol lain</p>
                         <tbody id="product-table">
                             <tr>
                                 <td class="px-4 py-2">
