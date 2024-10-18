@@ -53,12 +53,13 @@ class PurchaseController extends Controller
     {
         $index = 0;
         $dataProducts = [];
-        foreach ($request->products as $product){
+        foreach ($request->products as $index=>$product){
             $dataProduct = new stdClass();
             $dataProduct->id = $product;
             $dataProduct->quantity = $request->quantities[$index];
             $dataProduct->unit_price = $request->unit_prices[$index];
             $dataProduct->total_price = $request->total_prices[$index];
+            $dataProduct->category_id = $request->categories[$index];
             array_push($dataProducts, $dataProduct);
             $index++;
         };
@@ -70,7 +71,6 @@ class PurchaseController extends Controller
             'supplier_id' => 'required',
             'warehouse_id' => 'required',
             'user_id' => 'required',
-            'category_id' => 'required'
         ]);
 
         $validateData['products'] = json_encode((object)$dataProducts);
@@ -124,6 +124,7 @@ class PurchaseController extends Controller
             $dataProduct->quantity = $request->quantities[$index];
             $dataProduct->unit_price = $request->unit_prices[$index];
             $dataProduct->total_price = $request->total_prices[$index];
+            $dataProduct->category_id = $request->categories[$index];
             array_push($dataProducts, $dataProduct);
             $index++;
         };
@@ -135,7 +136,6 @@ class PurchaseController extends Controller
             'supplier_id' => 'required',
             'warehouse_id' => 'required',
             'user_id' => 'required',
-            'category_id' => 'required'
         ]);
 
         $validateData['products'] = json_encode((object)$dataProducts);

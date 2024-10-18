@@ -27,7 +27,7 @@
                 <!-- Tanggal Pembelian -->
                 <div class="mb-4">
                     <label for="purchase_date" class="block text-gray-700">Tanggal Pembelian</label>
-                    <input type="date" name="purchase_date" id="purchase_date" value="{{ old('purchase_date', $purchase->purchase_date) }}" class="w-full mt-1 p-2 border rounded @error('purchase_date') border-red-500 @enderror" required>
+                    <input type="date" name="purchase_date" id="purchase_date" value="{{ old('purchase_date', $purchase->purchase_date->format('Y-m-d')) }}" class="w-full mt-1 p-2 border rounded @error('purchase_date') border-red-500 @enderror" required>
                     @error('purchase_date')
                         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                     @enderror
@@ -82,7 +82,9 @@
                             <select name="categories[{{ $index }}]" id="categories[{{ $index }}]" class="w-full mt-1 p-2 border rounded @error('categories.' . $index) border-red-500 @enderror" required>
                                 <option value="">Pilih Kategori</option>
                                 @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}" {{ old('categories.' . $index, $dataProduct->category_id ?? '') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                                    <option value="{{ $category->id }}" {{ old('categories.' . $index, $dataProduct->category_id ?? '') == $category->id ? 'selected' : '' }}>
+                                        {{ $category->name }}
+                                    </option>
                                 @endforeach
                             </select>
                             @error('categories.' . $index)
