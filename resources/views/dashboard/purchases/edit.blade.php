@@ -82,7 +82,8 @@
                             <select name="categories[{{ $index }}]" id="categories[{{ $index }}]" class="w-full mt-1 p-2 border rounded @error('categories.' . $index) border-red-500 @enderror" required>
                                 <option value="">Pilih Kategori</option>
                                 @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}" {{ old('categories.' . $index, $dataProduct->category_id ?? '') == $category->id ? 'selected' : '' }}>
+                                    <option value="{{ $category->id }}" 
+                                        {{ old('categories.' . $index, $purchase->category_id ?? '') == $category->id ? 'selected' : '' }}>
                                         {{ $category->name }}
                                     </option>
                                 @endforeach
