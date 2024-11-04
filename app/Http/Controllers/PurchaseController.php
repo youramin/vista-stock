@@ -73,7 +73,7 @@ class PurchaseController extends Controller
             'user_id' => 'required',
         ]);
 
-        $validateData['products'] = json_encode((object)$dataProducts);
+        $validateData['products'] = json_encode($dataProducts);
         // dd($validateData);
         Purchase::create($validateData);
 
@@ -91,6 +91,7 @@ class PurchaseController extends Controller
         return view('dashboard.purchases.show', [
             'purchase' => $purchase,
             'products' => Product::all(),
+            'categories' => Category::all(),
             'title' => 'Detail Pembelian',
             compact('suppliers', 'warehouses')
         ]);
@@ -103,6 +104,9 @@ class PurchaseController extends Controller
         $categories = Category::all();
         $suppliers = Supplier::all();
         $warehouses = Warehouse::all();
+
+        /* $purchase->products = json_decode($purchase->products, true); */
+
         return response()-> view ('dashboard.purchases.edit', [
             'title' => 'Edit data pembelian',
             'purchase' => $purchase,
@@ -116,20 +120,17 @@ class PurchaseController extends Controller
     
     public function update(Request $request, Purchase $purchase): RedirectResponse
     {
-        $index = 0;
         $dataProducts = [];
-        foreach ($request->products as $product){
-            $dataProduct = new stdClass();
-            $dataProduct->id = $product;
+        foreach ($request->products as $index => $productId){
+            $dataProduct = new \stdClass();
+            $dataProduct->id = $productId;
             $dataProduct->quantity = $request->quantities[$index];
             $dataProduct->unit_price = $request->unit_prices[$index];
-            $dataProduct->total_price = $request->total_prices[$index];
+            $dataProduct->total_price = $request->total_prices[$index] * $request->unit_prices[$index];
             $dataProduct->category_id = $request->categories[$index];
-            array_push($dataProducts, $dataProduct);
-            $index++;
+            $dataProducts[] = $dataProduct;
         };
         
-        $request->request->add(['user_id' => auth()->user()->id]);
         $validateData = $request->validate([
             'purchase_date' => 'required',
             'purchase_number' => 'required',
@@ -138,9 +139,8 @@ class PurchaseController extends Controller
             'user_id' => 'required',
         ]);
 
-        $validateData['products'] = json_encode((object)$dataProducts);
-        // dd($validateData);
-        Purchase::create($validateData);
+        $validateData['products'] = json_encode($dataProducts);
+        $purchase->update($validateData);
 
 
         return redirect()->route('purchases.index')

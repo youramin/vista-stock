@@ -71,73 +71,63 @@
                 </div>
 
                 <!-- Produk -->
-                <div id="products-container">
-                    @php
-                        $dataProducts = json_decode($purchase->products);
-                    @endphp
-                    @foreach ($dataProducts as $index => $dataProduct)
-                        <div class="mb-4 product-row">
-                            <!-- Kategori Produk -->
-                            <label for="categories[{{ $index }}]" class="block text-gray-700">Kategori Produk {{ $index + 1 }}</label>
-                            <select name="categories[{{ $index }}]" id="categories[{{ $index }}]" class="w-full mt-1 p-2 border rounded @error('categories.' . $index) border-red-500 @enderror" required>
-                                <option value="">Pilih Kategori</option>
-                                @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}" 
-                                        {{ old('categories.' . $index, $purchase->category_id ?? '') == $category->id ? 'selected' : '' }}>
-                                        {{ $category->name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            @error('categories.' . $index)
-                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                            @enderror
-
-                            <!-- Produk -->
-                            <label for="products[{{ $index }}]" class="block text-gray-700">Produk {{ $index + 1 }}</label>
-                            <select name="products[{{ $index }}]" id="products[{{ $index }}]" class="w-full mt-1 p-2 border rounded @error('products.' . $index) border-red-500 @enderror" required>
-                                <option value="">Pilih Produk</option>
-                                @foreach ($products as $product)
-                                    <option value="{{ $product->id }}" {{ old('products.' . $index, $dataProduct->id) == $product->id ? 'selected' : '' }}>{{ $product->name }}</option>
-                                @endforeach
-                            </select>
-                            @error('products.' . $index)
-                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                            @enderror
-
-                            <!-- Kuantitas -->
-                            <label for="quantities[{{ $index }}]" class="block text-gray-700">Kuantitas {{ $index + 1 }}</label>
-                            <input type="number" name="quantities[{{ $index }}]" id="quantities[{{ $index }}]" value="{{ old('quantities.' . $index, $dataProduct->quantity) }}" class="w-full mt-1 p-2 border rounded @error('quantities.' . $index) border-red-500 @enderror" required>
-                            @error('quantities.' . $index)
-                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                            @enderror
-
-                            <!-- Harga Satuan -->
-                            <label for="unit_prices[{{ $index }}]" class="block text-gray-700">Harga Satuan {{ $index + 1 }}</label>
-                            <input type="number" step="0.01" name="unit_prices[{{ $index }}]" id="unit_prices[{{ $index }}]" value="{{ old('unit_prices.' . $index, $dataProduct->unit_price) }}" class="w-full mt-1 p-2 border rounded @error('unit_prices.' . $index) border-red-500 @enderror" required>
-                            @error('unit_prices.' . $index)
-                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                            @enderror
-
-                            <!-- Harga Total -->
-                            <label for="total_prices[{{ $index }}]" class="block text-gray-700">Harga Total {{ $index + 1 }}</label>
-                            <input type="number" step="0.01" name="total_prices[{{ $index }}]" id="total_prices[{{ $index }}]" value="{{ old('total_prices.' . $index, $dataProduct->total_price) }}" class="w-full mt-1 p-2 border rounded @error('total_prices.' . $index) border-red-500 @enderror" readonly>
-                            @error('total_prices.' . $index)
-                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                            @enderror
-
-                            <!-- Hapus Baris -->
-                            <button type="button" class="remove-row mt-2 bg-red-500 text-white p-2 rounded">Hapus Baris</button>
-                        </div>
-                    @endforeach
-                </div>
-
-                <!-- Tambah Produk Button -->
-                <button type="button" id="add-product" class="bg-blue-500 text-white p-2 rounded">Tambah Produk</button>
-
-                <!-- Submit Button -->
-                <div class="mt-6">
-                    <button type="submit" class="bg-green-500 text-white p-3 rounded-lg">Simpan Pembelian</button>
-                </div>
+                <div class="w-full max-w-6xl p-8 bg-white shadow-md rounded-lg mt-5">
+                    <h3 class="text-lg font-semibold mb-2">Detail Produk</h3>
+                    <table class="table-auto w-full text-left mb-4">
+                        <thead>
+                            <tr class="text-gray-700 bg-gray-200">
+                                <th class="px-4 py-2">Kategori</th>
+                                <th class="px-4 py-2">Nama Produk</th>
+                                <th class="px-4 py-2">Jumlah Satuan</th>
+                                <th class="px-4 py-2">Harga Satuan</th>
+                                <th class="px-4 py-2">Total Harga</th>
+                                <th class="px-4 py-2">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="product-table">
+                            @php
+                                $dataProducts = json_decode($purchase->products);
+                            @endphp
+                            @foreach($dataProducts as $index => $dataProduct)
+                                <tr class="product-row">
+                                    <td class="px-4 py-2">
+                                        <select name="category_id[]" class="w-full p-2 border rounded category-select" required>
+                                            <option value="">Pilih Kategori</option>
+                                            @foreach($categories as $category)
+                                                <option value="{{ $category->id }}" {{ old('category_id.' . $index, $purchase->category_id) == $category->id ? 'selected' : '' }}>
+                                                    {{ $category->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        <select name="products[]" class="w-full p-2 border rounded product-select" required>
+                                            <option value="">Pilih Produk</option>
+                                            @foreach($products as $product)
+                                                <option value="{{ $product->id }}" {{ old('products.' . $index, $dataProduct->id) == $product->id ? 'selected' : '' }}>
+                                                    {{ $product->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        <input type="number" name="quantities[]" class="w-full p-2 border rounded" value="{{ old('quantities.' . $index, $dataProduct->quantity) }}" required>
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        <input type="number" name="unit_prices[]" class="w-full p-2 border rounded" value="{{ old('unit_prices.' . $index, $dataProduct->unit_price) }}" required>
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        <input type="number" name="total_prices[]" class="w-full p-2 border rounded" value="{{ old('total_prices.' . $index, $dataProduct->total_price) }}" readonly>
+                                    </td>
+                                    <td class="px-4 py-2">
+                                        <button type="button" class="remove-row bg-red-500 text-white p-2 rounded">Hapus</button>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    <button type="button" id="add-row" class="bg-blue-500 text-white p-2 rounded">Tambah Baris</button>
+                </div>                
             </form>
         </div>
     </div>
@@ -146,72 +136,32 @@
 @section('scripts')
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        function calculateTotalPrice(index) {
-            const quantity = document.querySelector(`#quantities\\[${index}\\]`).value;
-            const unitPrice = document.querySelector(`#unit_prices\\[${index}\\]`).value;
-            const totalPrice = quantity * unitPrice;
-            document.querySelector(`#total_prices\\[${index}\\]`).value = totalPrice.toFixed(2);
+        const productTable = document.getElementById('product-table');
+
+        function calculateTotalPrice(row) {
+            const quantityInput = row.querySelector('.quantity-input');
+            const unitPriceInput = row.querySelector('.unit-price-input');
+            const totalPriceInput = row.querySelector('.total-price-input');
+            const totalPrice = (parseFloat(quantityInput.value) || 0) * (parseFloat(unitPriceInput.value) || 0);
+            totalPriceInput.value = totalPrice.toFixed(2);
         }
 
-        document.querySelectorAll('[id^="quantities"], [id^="unit_prices"]').forEach(input => {
-            input.addEventListener('input', function (e) {
-                const index = e.target.id.match(/\d+/)[0];
-                calculateTotalPrice(index);
+        document.getElementById('add-row').addEventListener('click', function () {
+            const newRow = productTable.querySelector('.product-row').cloneNode(true);
+            newRow.querySelectorAll('input').forEach(input => input.value = '');
+            productTable.appendChild(newRow);
+            newRow.querySelector('.remove-row').addEventListener('click', function () {
+                    newRow.remove();
             });
         });
 
-        document.getElementById('add-product-row').addEventListener('click', function () {
-            const index = document.querySelectorAll('.product-row').length;
-            const container = document.getElementById('products-container');
-            const rowHtml = `
-                <div class="mb-4 product-row">
-                    <label for="categories[${index}]" class="block text-gray-700">Kategori Produk ${index + 1}</label>
-                    <select name="categories[${index}]" id="categories[${index}]" class="w-full mt-1 p-2 border rounded" required>
-                        <option value="">Pilih Kategori</option>
-                        @foreach ($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
-                        @endforeach
-                    </select>
-                    
-                    <label for="products[${index}]" class="block text-gray-700">Produk ${index + 1}</label>
-                    <select name="products[${index}]" id="products[${index}]" class="w-full mt-1 p-2 border rounded" required>
-                        <option value="">Pilih Produk</option>
-                        @foreach ($products as $productOption)
-                            <option value="{{ $productOption->id }}">{{ $productOption->name }}</option>
-                        @endforeach
-                    </select>
-
-                    <label for="quantities[${index}]" class="block text-gray-700">Kuantitas ${index + 1}</label>
-                    <input type="number" name="quantities[${index}]" id="quantities[${index}]" class="w-full mt-1 p-2 border rounded" required>
-                    
-                    <label for="unit_prices[${index}]" class="block text-gray-700">Harga Satuan ${index + 1}</label>
-                    <input type="number" step="0.01" name="unit_prices[${index}]" id="unit_prices[${index}]" class="w-full mt-1 p-2 border rounded" required>
-                    
-                    <label for="total_prices[${index}]" class="block text-gray-700">Harga Total ${index + 1}</label>
-                    <input type="number" step="0.01" name="total_prices[${index}]" id="total_prices[${index}]" class="w-full mt-1 p-2 border rounded" readonly>
-                    
-                    <button type="button" class="remove-row mt-2 bg-red-500 text-white p-2 rounded">Hapus Baris</button>
-                </div>
-            `;
-            container.insertAdjacentHTML('beforeend', rowHtml);
-
-            document.querySelectorAll('[id^="quantities"], [id^="unit_prices"]').forEach(input => {
-                input.addEventListener('input', function (e) {
-                    const index = e.target.id.match(/\d+/)[0];
-                    calculateTotalPrice(index);
-                });
-            });
-
-            document.querySelectorAll('.remove-row').forEach(button => {
-                button.addEventListener('click', function () {
-                    this.parentElement.remove();
-                });
-            });
-        });
-
-        document.querySelectorAll('.remove-row').forEach(button => {
+        productTable.querySelectorAll('.remove-row').forEach(button => {
             button.addEventListener('click', function () {
-                this.parentElement.remove();
+                if (productTable.querySelectorAll('.product-row').length > 1) {
+                    button.closest('.product-row').remove();
+                } else {
+                    alert('Minimal satu baris produk harus ada.');
+                }
             });
         });
     });
